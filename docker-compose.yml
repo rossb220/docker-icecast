@@ -1,0 +1,23 @@
+version: '3.1'
+services:
+  icecast:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+        - .env
+    volumes:
+      - data:/usr/local/share/icecast
+    networks:
+      - internal
+      - web
+
+volumes:
+  data:
+
+networks:
+  web:
+    external: true
+  internal:
+    external: false
